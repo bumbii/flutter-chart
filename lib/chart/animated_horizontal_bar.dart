@@ -8,8 +8,11 @@ class AnimatedHorizontalBar extends StatefulWidget {
   final String title;
   final Color color;
 
-  AnimatedHorizontalBar({Key key, this.width = 0, this.title, this.color})
-      : super(key: key);
+  AnimatedHorizontalBar(
+      {super.key,
+      this.width = 0,
+      required this.title,
+      required this.color});
 
   @override
   _AnimatedHorizontalBarState createState() => _AnimatedHorizontalBarState();
@@ -60,7 +63,11 @@ class _AnimatedHorizontalBarState extends State<AnimatedHorizontalBar> {
             AnimatedContainer(
               duration: Duration(milliseconds: 1000),
               curve: Curves.bounceOut,
-              width: _width * (getScreenWidth(context) - Dimens.formPadding * 2 - Dimens.formPaddingSmall * 2) / 100,
+              width: _width *
+                  (getScreenWidth(context) -
+                      Dimens.formPadding * 2 -
+                      Dimens.formPaddingSmall * 2) /
+                  100,
               height: 8.0,
               decoration: BoxDecoration(
                   color: widget.color,

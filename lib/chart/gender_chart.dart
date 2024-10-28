@@ -8,11 +8,10 @@ import 'package:flutter/material.dart';
 class GenderChart extends StatelessWidget {
   final StatsGender statsGender;
 
-  const GenderChart({Key key, @required this.statsGender}) : super(key: key);
+  const GenderChart({super.key, required this.statsGender});
 
   @override
   Widget build(BuildContext context) {
-
     return ChartContainer(
       chartName: 'Gender',
       child: Column(
@@ -32,7 +31,7 @@ class GenderItem extends StatefulWidget {
   final bool isMale;
   final num percentage;
 
-  const GenderItem({Key key, this.isMale, this.percentage}) : super(key: key);
+  const GenderItem({super.key, required this.isMale, required this.percentage});
 
   @override
   _GenderItemState createState() => _GenderItemState();
@@ -40,8 +39,8 @@ class GenderItem extends StatefulWidget {
 
 class _GenderItemState extends State<GenderItem>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _animation;
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
   @override
   void initState() {
@@ -62,7 +61,6 @@ class _GenderItemState extends State<GenderItem>
 
   @override
   Widget build(BuildContext context) {
-
     final String gender = widget.isMale ? 'Male' : 'Female';
 
     final TextStyle textStyle = TextStyle(

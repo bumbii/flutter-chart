@@ -10,17 +10,17 @@ class WhatInfluencerPostCard extends StatelessWidget {
   final String title;
 
   const WhatInfluencerPostCard(
-      {Key key, this.interests, this.influencerUsername, this.title})
-      : super(key: key);
+      {super.key,
+      required this.interests,
+      required this.influencerUsername,
+      this.title = 'Post'});
 
   @override
   Widget build(BuildContext context) {
     List<ChartData> chartData = [];
-    if (interests != null) {
-      interests.forEach((interest) {
-        chartData.add(ChartData(name: interest.name, number: interest.value));
-      });
-    }
+    interests.forEach((interest) {
+      chartData.add(ChartData(name: interest.name, number: interest.value));
+    });
 
     if (chartData.length != 0) {
       return Column(
@@ -29,7 +29,7 @@ class WhatInfluencerPostCard extends StatelessWidget {
             height: Dimens.formMarginTop / 2,
           ),
           HorizontalBarChart(
-            chartName: this.title ?? 'What @$influencerUsername post',
+            chartName: this.title,
             data: chartData,
           )
         ],

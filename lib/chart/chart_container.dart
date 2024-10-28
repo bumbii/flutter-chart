@@ -8,16 +8,15 @@ class ChartContainer extends StatelessWidget {
   final String chartName;
   final Color borderColor;
   final Color color;
-  final Function onInfoIconPressed;
+  final Function? onInfoIconPressed;
 
   const ChartContainer(
-      {Key key,
-      this.child,
-      this.chartName,
-      this.borderColor,
-      this.color,
-      this.onInfoIconPressed})
-      : super(key: key);
+      {super.key,
+      required this.child,
+      required this.chartName,
+      this.borderColor = AppColors.lightGrey,
+      this.color = AppColors.white,
+      this.onInfoIconPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +24,9 @@ class ChartContainer extends StatelessWidget {
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Card(
-            color: this.color ?? AppColors.white,
+            color: this.color,
             shape: RoundedRectangleBorder(
-                side:
-                    BorderSide(color: this.borderColor ?? AppColors.lightGrey),
+                side: BorderSide(color: this.borderColor),
                 borderRadius: BorderRadius.all(Radius.circular(10.0))),
             elevation: 4,
             child: Padding(
@@ -57,7 +55,7 @@ class ChartContainer extends StatelessWidget {
                                 size: MediaQuery.of(context).size.width / 12,
                               ),
                               onTap: () {
-                                this.onInfoIconPressed();
+                                this.onInfoIconPressed?.call();
                               },
                             )
                           : Container()

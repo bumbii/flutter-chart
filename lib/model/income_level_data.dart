@@ -3,6 +3,6 @@ class IncomeLevelData {
   num value;
   String image;
 
-  IncomeLevelData({this.name, this.value, this.image});
+  IncomeLevelData({required this.name, required this.value, required this.image});
 
 }

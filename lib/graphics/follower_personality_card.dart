@@ -6,29 +6,22 @@ import 'package:flutter/material.dart';
 class FollowerPersonalityCard extends StatelessWidget {
   final List<Personality> personalities;
 
-  const FollowerPersonalityCard({Key key, this.personalities})
-      : super(key: key);
+  const FollowerPersonalityCard({super.key, required this.personalities});
 
   @override
   Widget build(BuildContext context) {
-
     List<ChartData> chartData = [];
-    if (personalities != null) {
-      personalities.forEach((personality) {
-        chartData
-            .add(ChartData(name: personality.name, number: personality.value));
-      });
-    }
+    personalities.forEach((personality) {
+      chartData.add(
+          ChartData(name: personality.name, number: personality.value ?? 0));
+    });
 
     return chartData.length == 0
         ? Text("")
         : HorizontalBarChart(
             chartName: 'Followers Personality',
             data: chartData,
-            onInfoIconPressed: () {
-
-            },
+            onInfoIconPressed: () {},
           );
   }
-
 }

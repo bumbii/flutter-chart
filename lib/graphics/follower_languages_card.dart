@@ -10,18 +10,17 @@ class FollowerLanguagesCard extends StatelessWidget {
   final int followers;
 
   const FollowerLanguagesCard(
-      {Key key, this.languages, this.username, this.followers = 0})
-      : super(key: key);
+      {super.key,
+      required this.languages,
+      required this.username,
+      this.followers = 0});
 
   @override
   Widget build(BuildContext context) {
-
     List<ChartData> chartData = [];
-    if (languages != null) {
-      languages.forEach((mention) {
-        chartData.add(ChartData(name: mention.name, number: mention.value));
-      });
-    }
+    languages.forEach((mention) {
+      chartData.add(ChartData(name: mention.name, number: mention.value));
+    });
 
     return DonutChart(
       chartName: 'Followers language',

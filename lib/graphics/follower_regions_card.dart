@@ -11,21 +11,18 @@ class FollowerRegionsCard extends StatelessWidget {
   final Color barColor;
 
   const FollowerRegionsCard(
-      {Key key,
-      this.regions,
+      {super.key,
+      required this.regions,
       this.barColor = AppColors.primary,
-      this.influencerUsername})
-      : super(key: key);
+      required this.influencerUsername});
 
   @override
   Widget build(BuildContext context) {
 
     List<ChartData> chartData = [];
-    if (regions != null) {
-      regions.forEach((country) {
-        chartData.add(ChartData(name: country.name, number: country.value));
-      });
-    }
+    regions.forEach((country) {
+      chartData.add(ChartData(name: country.name, number: country.value));
+    });
 
     return HorizontalBarChart1(
       chartName: 'Followers region',

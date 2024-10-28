@@ -5,24 +5,23 @@ import 'package:demographics/utils/colors.dart';
 import 'package:demographics/utils/dimens.dart';
 import 'package:flutter/material.dart';
 
-
 class InfluencerMentionsCard extends StatelessWidget {
   final String chartTitle;
   final List<HashTag> mentions;
   final Color barColor;
 
   const InfluencerMentionsCard(
-      {Key key, this.mentions, this.barColor = AppColors.primary, this.chartTitle})
-      : super(key: key);
+      {super.key,
+      required this.mentions,
+      this.barColor = AppColors.primary,
+      this.chartTitle = 'Mention'});
 
   @override
   Widget build(BuildContext context) {
     List<ChartData> chartData = [];
-    if (mentions != null) {
-      mentions.forEach((mention) {
-        chartData.add(ChartData(name: mention.name, number: mention.value));
-      });
-    }
+    mentions.forEach((mention) {
+      chartData.add(ChartData(name: mention.name, number: mention.value));
+    });
 
     if (chartData.length != 0) {
       return Column(
@@ -31,7 +30,7 @@ class InfluencerMentionsCard extends StatelessWidget {
             height: Dimens.formMarginTop / 2,
           ),
           HorizontalBarChart1(
-            chartName: chartTitle ?? 'Mention',
+            chartName: chartTitle,
             data: chartData,
             color: barColor,
           )

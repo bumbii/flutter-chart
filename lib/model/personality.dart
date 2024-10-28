@@ -1,6 +1,6 @@
 class Personality {
   final String name;
-  final num value;
+  final num? value;
 
   Personality(this.name, {this.value});
 }

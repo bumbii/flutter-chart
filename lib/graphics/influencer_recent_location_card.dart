@@ -9,8 +9,7 @@ class InfluencerRecentLocationCard extends StatelessWidget {
   final String city;
 
   const InfluencerRecentLocationCard(
-      {Key key, this.country = '', this.region = '', this.city = ''})
-      : super(key: key);
+      {super.key, this.country = '', this.region = '', this.city = ''});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,6 @@ class InfluencerRecentLocationCard extends StatelessWidget {
   }
 
   _buildRecentLocation(BuildContext context) {
-
     if (country.isEmpty && region.isEmpty && city.isEmpty) {
       return Container();
     } else {
@@ -40,15 +38,15 @@ class InfluencerRecentLocationCard extends StatelessWidget {
       return Container();
     } else {
       return Column(
-         children: <Widget>[
-           ChartTextItem(
-             title: countryTitle.toUpperCase(),
-             value: this.country,
-           ),
-           SizedBox(
-             height: Dimens.formMarginTop,
-           ),
-         ],
+        children: <Widget>[
+          ChartTextItem(
+            title: countryTitle.toUpperCase(),
+            value: this.country,
+          ),
+          SizedBox(
+            height: Dimens.formMarginTop,
+          ),
+        ],
       );
     }
   }
@@ -59,9 +57,7 @@ class InfluencerRecentLocationCard extends StatelessWidget {
         Expanded(
           child: _buildRegion(regionTitle),
         ),
-        Expanded(
-          child: _buildCity(cityTitle)
-        )
+        Expanded(child: _buildCity(cityTitle))
       ],
     );
   }

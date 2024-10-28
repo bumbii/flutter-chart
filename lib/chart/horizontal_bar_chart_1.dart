@@ -4,17 +4,17 @@ import 'package:demographics/model/chart_data.dart';
 import 'package:demographics/utils/dimens.dart';
 import 'package:flutter/material.dart';
 
-
 class HorizontalBarChart1 extends StatelessWidget {
   final String chartName;
   final List<ChartData> data;
   final Color color;
 
   const HorizontalBarChart1({
-    Key key,
+    super.key,
     this.chartName = '',
-    @required this.data, this.color,
-  }) : super(key: key);
+    required this.data,
+    required this.color,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +30,8 @@ class HorizontalBarChart1 extends StatelessWidget {
     List<Widget> chartBars = [];
     for (int i = 0; i < this.data.length; i++) {
       AnimatedHorizontalBarNoBackground bar = AnimatedHorizontalBarNoBackground(
-        title: this.data[i].name != null ? this.data[i].name : '',
-        percentages: this.data[i].number != null ? this.data[i].number : 0.0,
+        title: this.data[i].name,
+        percentages: this.data[i].number,
         color: color,
       );
 

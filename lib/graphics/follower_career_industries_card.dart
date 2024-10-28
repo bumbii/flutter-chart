@@ -10,21 +10,18 @@ class FollowerCareerIndustriesCard extends StatelessWidget {
   final String influencerUsername;
 
   const FollowerCareerIndustriesCard(
-      {Key key,
-      this.industries,
+      {super.key,
+      required this.industries,
       this.barColor = AppColors.primary,
-      this.influencerUsername})
-      : super(key: key);
+      required this.influencerUsername});
 
   @override
   Widget build(BuildContext context) {
 
     List<ChartData> chartData = [];
-    if (industries != null) {
-      industries.forEach((mention) {
-        chartData.add(ChartData(name: mention.name, number: mention.value));
-      });
-    }
+    industries.forEach((mention) {
+      chartData.add(ChartData(name: mention.name, number: mention.value));
+    });
 
     return HorizontalBarChart1(
       chartName: 'Industry',

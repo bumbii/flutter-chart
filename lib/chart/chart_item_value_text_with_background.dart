@@ -8,27 +8,25 @@ class ChartItemValueTextWithBackground extends StatelessWidget {
   final Color texColor;
 
   const ChartItemValueTextWithBackground(
-      {Key key, this.value, this.backgroundColor, this.texColor})
-      : super(key: key);
+      {super.key,
+      required this.value,
+      this.backgroundColor = AppColors.chartItemBackground,
+      this.texColor = AppColors.white});
 
   @override
   Widget build(BuildContext context) {
-    if (this.value != null) {
-      return Container(
-        padding: EdgeInsets.symmetric(
-            horizontal: Dimens.formPaddingSmall,
-            vertical: Dimens.formPaddingTiny),
-        color: this.backgroundColor ?? AppColors.chartItemBackground,
-        child: Text(
-          this.value,
-          style: TextStyle(
-              color: this.texColor ?? AppColors.white,
-              fontSize: Dimens.chartSectionTextSize,
-              fontWeight: FontWeight.w900),
-        ),
-      );
-    } else {
-      return Container();
-    }
+    return Container(
+      padding: EdgeInsets.symmetric(
+          horizontal: Dimens.formPaddingSmall,
+          vertical: Dimens.formPaddingTiny),
+      color: this.backgroundColor,
+      child: Text(
+        this.value,
+        style: TextStyle(
+            color: this.texColor,
+            fontSize: Dimens.chartSectionTextSize,
+            fontWeight: FontWeight.w900),
+      ),
+    );
   }
 }

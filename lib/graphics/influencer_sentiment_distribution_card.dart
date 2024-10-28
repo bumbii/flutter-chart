@@ -8,16 +8,17 @@ class InfluencerSentimentDistributionCard extends StatelessWidget {
   final num high;
 
   const InfluencerSentimentDistributionCard(
-      {Key key, this.low, this.medium, this.high})
-      : super(key: key);
+      {super.key, required this.low, required this.medium, required this.high});
 
   @override
   Widget build(BuildContext context) {
-
     List<ChartData> chartData = [];
-    chartData.add(ChartData(name: 'Low', number: this.low, isHighlighted: true));
-    chartData.add(ChartData(name: 'Medium', number: this.medium, isHighlighted: false));
-    chartData.add(ChartData(name: 'High', number: this.high, isHighlighted: false));
+    chartData
+        .add(ChartData(name: 'Low', number: this.low, isHighlighted: true));
+    chartData.add(
+        ChartData(name: 'Medium', number: this.medium, isHighlighted: false));
+    chartData
+        .add(ChartData(name: 'High', number: this.high, isHighlighted: false));
 
     num topValue = 0;
     int position = 0;
@@ -31,12 +32,12 @@ class InfluencerSentimentDistributionCard extends StatelessWidget {
     String name = updateDataHighlight.name;
     num value = updateDataHighlight.number;
     chartData.removeAt(position);
-    chartData.insert(position, ChartData(name: name, number: value, isHighlighted: true));
+    chartData.insert(
+        position, ChartData(name: name, number: value, isHighlighted: true));
 
     return PieChart(
       chartName: 'Sentiment Distribution',
       data: chartData,
     );
   }
-
 }

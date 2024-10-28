@@ -10,19 +10,18 @@ class InfluencerProfileCard extends StatelessWidget {
   final List<Personality> personalities;
   final List<Language> languages;
 
-  const InfluencerProfileCard({Key key, this.personalities, this.languages})
-      : super(key: key);
+  const InfluencerProfileCard(
+      {super.key, required this.personalities, required this.languages});
 
   @override
   Widget build(BuildContext context) {
-
     return ChartContainer(
       chartName: 'Profile',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           ChartItemTitleText(
-            title:'Personality.',
+            title: 'Personality.',
           ),
           SizedBox(
             height: Dimens.formPaddingTiny,
@@ -44,7 +43,7 @@ class InfluencerProfileCard extends StatelessWidget {
   }
 
   _buildPersonalities() {
-    if (this.personalities != null && this.personalities.length != 0) {
+    if (this.personalities.length != 0) {
       List<Widget> children = [];
       this.personalities.forEach((personality) {
         children.add(ChartItemValueTextWithBackground(
@@ -61,7 +60,7 @@ class InfluencerProfileCard extends StatelessWidget {
   }
 
   _buildLanguages() {
-    if (this.languages != null && this.languages.length != 0) {
+    if (this.languages.length != 0) {
       List<Widget> children = [];
       this.languages.forEach((language) {
         children.add(ChartItemValueTextWithBackground(

@@ -9,12 +9,11 @@ class ChartDataName extends StatelessWidget {
   final String percentages;
 
   const ChartDataName(
-      {Key key,
+      {super.key,
       this.color = AppColors.primary,
-      this.name,
+      required this.name,
       this.textColor = AppColors.white,
-      this.percentages})
-      : super(key: key);
+      required this.percentages});
 
   @override
   Widget build(BuildContext context) {

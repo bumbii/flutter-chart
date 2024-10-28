@@ -1,5 +1,3 @@
-
-
 import 'package:demographics/utils/dimens.dart';
 import 'package:demographics/utils/number_utils.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +5,7 @@ import 'package:flutter/material.dart';
 class FollowersText extends StatelessWidget {
   final int followersNumber;
 
-  const FollowersText({Key key, this.followersNumber}) : super(key: key);
+  const FollowersText({super.key, required this.followersNumber});
 
   @override
   Widget build(BuildContext context) {

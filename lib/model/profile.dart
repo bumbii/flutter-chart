@@ -1,36 +1,36 @@
 class Profile {
-  String coverImageUrl;
-  String profileImageUrl;
-  num totalReach;
-  num rate;
-  String username;
-  String firstName;
-  String lastName;
-  String city;
-  String country;
-  num countryCode;
-  String bio;
-  num engagementRate;
-  num followers;
-  num totalPosts;
-  num engagementsPerPost;
-  num likesPerPost;
-  num commentsPerPost;
-  List<CommonData> commonTags;
-  num instagramReach;
-  num facebookReach;
-  num koliReach;
-  List<Interest> interests;
-  bool isUsernameUpdated;
-  String display;
-  String dateOfBirth;
-  String mobile;
-  String gender;
-  String email;
-  String countryIsoCode;
-  String instaUsername;
-  String ownerId;
-  String description;
+  String? coverImageUrl;
+  String? profileImageUrl;
+  num? totalReach;
+  num? rate;
+  String? username;
+  String? firstName;
+  String? lastName;
+  String? city;
+  String? country;
+  num? countryCode;
+  String? bio;
+  num? engagementRate;
+  num? followers;
+  num? totalPosts;
+  num? engagementsPerPost;
+  num? likesPerPost;
+  num? commentsPerPost;
+  List<CommonData>? commonTags;
+  num? instagramReach;
+  num? facebookReach;
+  num? koliReach;
+  List<Interest>? interests;
+  bool? isUsernameUpdated;
+  String? display;
+  String? dateOfBirth;
+  String? mobile;
+  String? gender;
+  String? email;
+  String? countryIsoCode;
+  String? instaUsername;
+  String? ownerId;
+  String? description;
 
   Profile(
       {this.coverImageUrl = '',
@@ -49,11 +49,11 @@ class Profile {
       this.engagementsPerPost = 0,
       this.likesPerPost = 0,
       this.commentsPerPost = 0,
-      this.commonTags,
+      this.commonTags = const [],
       this.instagramReach = 0,
       this.facebookReach = 0,
       this.koliReach = 0,
-      this.interests,
+      this.interests = const [],
       this.isUsernameUpdated = false,
       this.display = '',
       this.countryCode = 0,
@@ -83,20 +83,20 @@ class Profile {
     engagementsPerPost = json['engagementsPerPost'];
     likesPerPost = json['likesPerPost'];
 
-    commentsPerPost = json['commentsPerPost'];
+    commentsPerPost = json['commentsPerPost'] ?? 0;
     if (json['commonTags'] != null) {
-      commonTags = List<CommonData>();
+      commonTags = [];
       json['commonTags'].forEach((v) {
-        commonTags.add(CommonData.fromJson(v));
+        commonTags?.add(CommonData.fromJson(v));
       });
     }
     instagramReach = json['instagramReach'];
     facebookReach = json['facebookReach'];
     koliReach = json['koliReach'];
     if (json['interests'] != null) {
-      interests = List<Interest>();
+      interests = [];
       json['interests'].forEach((v) {
-        interests.add(Interest(v));
+        interests?.add(Interest(v));
       });
     }
     isUsernameUpdated = json['isUsernameUpdated'] ?? false;
@@ -129,10 +129,10 @@ class Profile {
 }
 
 class CommonData {
-  String name;
-  num value;
+  String? name;
+  num? value;
 
-  CommonData({this.name, this.value});
+  CommonData({this.name = '', this.value});
 
   CommonData.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -148,8 +148,8 @@ class CommonData {
 }
 
 class Interest {
-  String name;
-  bool isSelected;
+  String? name;
+  bool? isSelected;
 
   Interest(this.name, {this.isSelected = false});
 

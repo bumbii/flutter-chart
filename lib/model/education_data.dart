@@ -2,5 +2,5 @@ class EducationData {
   String name;
   num value;
 
-  EducationData({this.name, this.value});
+  EducationData({required this.name, required this.value});
 }

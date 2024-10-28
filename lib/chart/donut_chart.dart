@@ -11,17 +11,16 @@ import 'package:flutter/material.dart';
 
 class DonutChart extends StatefulWidget {
   final String chartName;
-  final double radius;
+  final double? radius;
   final Widget centerWidget;
   final List<ChartData> data;
 
   const DonutChart(
-      {Key key,
-      this.chartName,
-      this.centerWidget,
-      @required this.data,
-      this.radius})
-      : super(key: key);
+      {super.key,
+      required this.chartName,
+      required this.centerWidget,
+      required this.data,
+      this.radius});
 
   @override
   _DonutChartState createState() => _DonutChartState();
@@ -29,8 +28,8 @@ class DonutChart extends StatefulWidget {
 
 class _DonutChartState extends State<DonutChart>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation _animation;
+  late AnimationController _animationController;
+  late Animation<double> _animation;
 
   @override
   void initState() {
@@ -40,9 +39,7 @@ class _DonutChartState extends State<DonutChart>
     _animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
         parent: _animationController, curve: Curves.easeOutSine));
     _animationController.addListener(() {
-      setState(() {
-
-      });
+      setState(() {});
     });
     _animationController.forward();
   }
@@ -55,9 +52,8 @@ class _DonutChartState extends State<DonutChart>
 
   @override
   Widget build(BuildContext context) {
-    double radius = widget.radius != null
-        ? widget.radius
-        : getScreenWidth(context) * 0.3;
+    double radius =
+        widget.radius != null ? widget.radius! : getScreenWidth(context) * 0.3;
     double strokeWidth = radius / 2;
 
     return ChartContainer(
@@ -71,7 +67,7 @@ class _DonutChartState extends State<DonutChart>
               children: <Widget>[
                 Container(
                   width: getScreenWidth(context),
-                  height: radius * 2 + strokeWidth/2,
+                  height: radius * 2 + strokeWidth / 2,
                   child: CustomPaint(
                     foregroundPainter: DonutChatPainter(widget.data,
                         radius: radius,
@@ -82,7 +78,7 @@ class _DonutChartState extends State<DonutChart>
                 ScaleTransition(
                   scale: _animation,
                   alignment: Alignment.center,
-                  child: widget.centerWidget ?? Container(),
+                  child: widget.centerWidget,
                 )
               ],
             ),
@@ -101,7 +97,7 @@ class _DonutChartState extends State<DonutChart>
 
   _buildChartDataNames() {
     List<Widget> chartDataNames = [];
-    if (widget.data != null && widget.data.length > 0) {
+    if (widget.data.length > 0) {
       int colorIndex = 0;
       widget.data.forEach((chartData) {
         ChartDataName chartDataName = ChartDataName(
@@ -126,36 +122,36 @@ class DonutChatPainter extends CustomPainter {
   final Animation animation;
 
   DonutChatPainter(this.data,
-      {this.radius, this.strokeWidth, this.animation});
+      {required this.radius,
+      required this.strokeWidth,
+      required this.animation});
 
   @override
   void paint(Canvas canvas, Size size) {
-    if (this.data != null) {
-      int colorIndex = 0;
-      Paint paint = Paint()
-        ..color = AppColors.chartColors[colorIndex]
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = this.strokeWidth;
+    int colorIndex = 0;
+    Paint paint = Paint()
+      ..color = AppColors.chartColors[colorIndex]
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = this.strokeWidth;
 
-      Offset center = Offset(size.width / 2, size.height / 2);
+    Offset center = Offset(size.width / 2, size.height / 2);
 
-      double startAngle = -pi / 2;
-      double totalSweepAngle = 0;
-      double currentSweepAngle = 0;
+    double startAngle = -pi / 2;
+    double totalSweepAngle = 0;
+    double currentSweepAngle = 0;
 
-      this.data.forEach((ChartData chartData) {
-        /// Calculate sweep angle, subtract {pi / 100} to make a small spaces between 2 parts
-        totalSweepAngle = 2 * pi * chartData.number - pi / 100;
-        currentSweepAngle = totalSweepAngle * animation.value;
+    this.data.forEach((ChartData chartData) {
+      /// Calculate sweep angle, subtract {pi / 100} to make a small spaces between 2 parts
+      totalSweepAngle = 2 * pi * chartData.number - pi / 100;
+      currentSweepAngle = totalSweepAngle * animation.value;
 
-        canvas.drawArc(Rect.fromCircle(center: center, radius: radius),
-            startAngle, currentSweepAngle, false, paint);
+      canvas.drawArc(Rect.fromCircle(center: center, radius: radius),
+          startAngle, currentSweepAngle, false, paint);
 
-        /// Calculate new start angle, add {pi / 100} to make a small space between 2 parts
-        startAngle += totalSweepAngle + pi / 100;
-        paint.color = AppColors.chartColors[++colorIndex];
-      });
-    }
+      /// Calculate new start angle, add {pi / 100} to make a small space between 2 parts
+      startAngle += totalSweepAngle + pi / 100;
+      paint.color = AppColors.chartColors[++colorIndex];
+    });
   }
 
   @override

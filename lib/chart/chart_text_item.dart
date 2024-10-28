@@ -7,8 +7,7 @@ class ChartTextItem extends StatelessWidget {
   final String title;
   final String value;
 
-  const ChartTextItem({Key key, this.title = '', this.value = ''})
-      : super(key: key);
+  const ChartTextItem({super.key, this.title = '', this.value = ''});
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +15,13 @@ class ChartTextItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         ChartItemTitleText(
-          title: this.title ?? '',
+          title: this.title,
         ),
         SizedBox(
           height: Dimens.formPaddingTiny,
         ),
         ChartItemValueText(
-          value: this.value ?? '',
+          value: this.value,
         )
       ],
     );

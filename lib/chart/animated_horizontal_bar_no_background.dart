@@ -11,13 +11,12 @@ class AnimatedHorizontalBarNoBackground extends StatefulWidget {
   final Color titleColor;
 
   AnimatedHorizontalBarNoBackground(
-      {Key key,
+      {super.key,
       this.percentages = 0.0,
       this.title = '',
       this.color = AppColors.primary,
       this.percentagesColor = AppColors.primary,
-      this.titleColor = AppColors.black})
-      : super(key: key);
+      this.titleColor = AppColors.black});
 
   @override
   _AnimatedHorizontalBarNoBackgroundState createState() =>

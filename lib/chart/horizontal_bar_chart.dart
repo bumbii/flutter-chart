@@ -4,13 +4,17 @@ import 'package:demographics/model/chart_data.dart';
 import 'package:demographics/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-
 class HorizontalBarChart extends StatelessWidget {
   final String chartName;
   final List<ChartData> data;
-  final Function onInfoIconPressed;
+  final Function? onInfoIconPressed;
 
-  const HorizontalBarChart({Key key, this.chartName = '', @required this.data, this.onInfoIconPressed,}) : super(key: key);
+  const HorizontalBarChart({
+    super.key,
+    this.chartName = '',
+    required this.data,
+    this.onInfoIconPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +22,8 @@ class HorizontalBarChart extends StatelessWidget {
       onInfoIconPressed: this.onInfoIconPressed,
       chartName: chartName,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: _buildChartBars()
-      ),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: _buildChartBars()),
     );
   }
 
@@ -28,13 +31,15 @@ class HorizontalBarChart extends StatelessWidget {
     List<Widget> chartBars = [];
     for (int i = 0; i < this.data.length; i++) {
       AnimatedHorizontalBar bar = AnimatedHorizontalBar(
-        title: this.data[i].name != null ? this.data[i].name : '',
-        width: this.data[i].number != null ? this.data[i].number : 0.0,
+        title: this.data[i].name,
+        width: this.data[i].number,
         color: AppColors.chartColors[i % AppColors.chartColors.length],
       );
 
       chartBars.add(bar);
-      chartBars.add(SizedBox(height: 10,));
+      chartBars.add(SizedBox(
+        height: 10,
+      ));
     }
 
     if (chartBars.isNotEmpty) {

@@ -3,5 +3,6 @@ class ChartData {
   num number;
   bool isHighlighted;
 
-  ChartData({this.name, this.number, this.isHighlighted = false});
+  ChartData(
+      {required this.name, required this.number, this.isHighlighted = false});
 }

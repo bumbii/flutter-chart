@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 class InfluencerGlobalScore extends StatelessWidget {
   final double globalScore;
 
-  const InfluencerGlobalScore({Key key, this.globalScore = 0})
-      : super(key: key);
+  const InfluencerGlobalScore({super.key, this.globalScore = 0});
 
   @override
   Widget build(BuildContext context) {

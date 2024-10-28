@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:demographics/chart/chart_container.dart';
 import 'package:demographics/chart/chart_data_name.dart';
@@ -10,14 +9,13 @@ import 'package:demographics/utils/number_utils.dart';
 import 'package:demographics/utils/ui_utils.dart';
 import 'package:flutter/material.dart';
 
-
 class PieChart extends StatefulWidget {
   final String chartName;
-  final double radius;
+  final double? radius;
   final List<ChartData> data;
 
-  const PieChart({Key key, this.chartName, @required this.data, this.radius})
-      : super(key: key);
+  const PieChart(
+      {super.key, required this.chartName, required this.data, this.radius});
 
   @override
   _PieChartState createState() => _PieChartState();
@@ -25,8 +23,8 @@ class PieChart extends StatefulWidget {
 
 class _PieChartState extends State<PieChart>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation _animation;
+  late AnimationController _animationController;
+  late Animation _animation;
 
   @override
   void initState() {
@@ -50,8 +48,9 @@ class _PieChartState extends State<PieChart>
 
   @override
   Widget build(BuildContext context) {
-    double radius =
-        widget.radius != null ? widget.radius : getScreenWidth(context) * 0.375;
+    double radius = widget.radius != null
+        ? widget.radius!
+        : getScreenWidth(context) * 0.375;
 
     return ChartContainer(
       chartName: this.widget.chartName,
@@ -87,7 +86,7 @@ class _PieChartState extends State<PieChart>
 
   _buildChartDataNames() {
     List<Widget> chartDataNames = [];
-    if (widget.data != null && widget.data.length > 0) {
+    if (widget.data.length > 0) {
       int colorIndex = 0;
       widget.data.forEach((chartData) {
         ChartDataName chartDataName = ChartDataName(
@@ -115,59 +114,61 @@ class PieChatPainter extends CustomPainter {
   final List<ChartData> data;
   final Animation animation;
 
-  PieChatPainter(this.data, {this.radius, this.animation});
+  PieChatPainter(this.data, {required this.radius, required this.animation});
 
   @override
   void paint(Canvas canvas, Size size) {
-    if (this.data != null) {
-      int colorIndex = 1;
-      Paint paint = Paint()
-        ..color = AppColors.chartColors[colorIndex]
-        ..style = PaintingStyle.fill;
+    int colorIndex = 1;
+    Paint paint = Paint()
+      ..color = AppColors.chartColors[colorIndex]
+      ..style = PaintingStyle.fill;
 
-      Offset center = Offset(size.width / 2, size.height / 2);
+    Offset center = Offset(size.width / 2, size.height / 2);
 
-      /// Highlighted part will be always drawn as the first "pie"
-      double highlightedStartAngle = -pi / 2;
+    /// Highlighted part will be always drawn as the first "pie"
+    double highlightedStartAngle = -pi / 2;
 
-      /// Find the highlighted part
-      ChartData highlightedData = data.firstWhere(
-          (ChartData chartData) => chartData.isHighlighted,
-          orElse: () => data[0]);
-      double highlightedSweepAngle = 2 * pi * highlightedData.number - pi / 40;
+    /// Find the highlighted part
+    ChartData highlightedData = data.firstWhere(
+        (ChartData chartData) => chartData.isHighlighted,
+        orElse: () => data[0]);
+    double highlightedSweepAngle = 2 * pi * highlightedData.number - pi / 40;
 
-      /// Find the start angle of second part
-      double startAngle = highlightedStartAngle + highlightedSweepAngle;
-      double totalSweepAngle = 0;
-      double currentSweepAngle = 0;
+    /// Find the start angle of second part
+    double startAngle = highlightedStartAngle + highlightedSweepAngle;
+    double totalSweepAngle = 0;
+    double currentSweepAngle = 0;
 
-      this.data.forEach((ChartData chartData) {
-        if (!chartData.isHighlighted) {
-          /// Calculate sweep angle, subtract {pi / 100} to make a small spaces between 2 parts
-          totalSweepAngle = 2 * pi * chartData.number;
-          currentSweepAngle = totalSweepAngle * animation.value + pi / 40;
+    this.data.forEach((ChartData chartData) {
+      if (!chartData.isHighlighted) {
+        /// Calculate sweep angle, subtract {pi / 100} to make a small spaces between 2 parts
+        totalSweepAngle = 2 * pi * chartData.number;
+        currentSweepAngle = totalSweepAngle * animation.value + pi / 40;
 
-          canvas.drawArc(Rect.fromCircle(center: center, radius: radius),
-              startAngle, currentSweepAngle, true, paint);
+        canvas.drawArc(Rect.fromCircle(center: center, radius: radius),
+            startAngle, currentSweepAngle, true, paint);
 
-          /// Calculate new start angle, add {pi / 100} to make a small space between 2 parts
-          startAngle += totalSweepAngle;
-          paint.color = AppColors.chartColors[++colorIndex];
-        }
-      });
+        /// Calculate new start angle, add {pi / 100} to make a small space between 2 parts
+        startAngle += totalSweepAngle;
+        paint.color = AppColors.chartColors[++colorIndex];
+      }
+    });
 
-      /// Draw center white circle
-      paint.color = AppColors.white;
-      canvas.drawCircle(center, radius / 5, paint);
+    /// Draw center white circle
+    paint.color = AppColors.white;
+    canvas.drawCircle(center, radius / 5, paint);
 
-      /// Draw highlighted "pie"
-      paint.color = AppColors.chartColors[0];
+    /// Draw highlighted "pie"
+    paint.color = AppColors.chartColors[0];
 
-      int fY = highlightedData.number > 0.75 ? 4 : 0;
-      center = Offset(size.width / 2 + 4, size.height / 2 + fY);
-      canvas.drawArc(Rect.fromCircle(center: center, radius: radius * 1.1),
-          highlightedStartAngle, highlightedSweepAngle * animation.value, true, paint);
-    }
+    int fY = highlightedData.number > 0.75 ? 4 : 0;
+    center = Offset(size.width / 2 + 4, size.height / 2 + fY);
+    canvas.drawArc(
+        Rect.fromCircle(center: center, radius: radius * 1.1),
+        highlightedStartAngle,
+        highlightedSweepAngle * animation.value,
+        true,
+        paint);
   }
 
   @override

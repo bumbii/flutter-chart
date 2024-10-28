@@ -11,16 +11,14 @@ class InfluencerStatisticsCard extends StatelessWidget {
   final double activeFollowersLevels;
 
   const InfluencerStatisticsCard(
-      {Key key,
+      {super.key,
       this.followers = 0,
       this.suspiciousFollowers = 0,
       this.activeFollowers = 0,
-      this.activeFollowersLevels = 0})
-      : super(key: key);
+      this.activeFollowersLevels = 0});
 
   @override
   Widget build(BuildContext context) {
-
     return ChartContainer(
       chartName: 'Statistics',
       child: Column(

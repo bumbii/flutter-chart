@@ -9,7 +9,6 @@ import 'package:demographics/graphics/follower_countries_card.dart';
 import 'package:demographics/graphics/follower_languages_card.dart';
 import 'package:demographics/graphics/follower_personality_card.dart';
 import 'package:demographics/graphics/follower_regions_card.dart';
-import 'package:demographics/graphics/influencer_global_score.dart';
 import 'package:demographics/graphics/influencer_mentions_card.dart';
 import 'package:demographics/graphics/influencer_profile_card.dart';
 import 'package:demographics/graphics/influencer_recent_location_card.dart';

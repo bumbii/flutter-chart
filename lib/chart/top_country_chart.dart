@@ -1,7 +1,6 @@
 import 'package:demographics/chart/chart_container.dart';
 import 'package:demographics/utils/colors.dart';
 import 'package:demographics/utils/dimens.dart';
-import 'package:demographics/utils/ui_utils.dart';
 import 'package:flutter/material.dart';
 
 class TopCountryChart extends StatelessWidget {
@@ -9,12 +8,10 @@ class TopCountryChart extends StatelessWidget {
   final double percentage;
 
   const TopCountryChart(
-      {Key key, @required this.country, @required this.percentage})
-      : super(key: key);
+      {super.key, required this.country, required this.percentage});
 
   @override
   Widget build(BuildContext context) {
-
     return ChartContainer(
       chartName: country,
       child: Column(

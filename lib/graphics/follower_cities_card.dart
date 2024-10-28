@@ -10,21 +10,18 @@ class FollowerCitiesCard extends StatelessWidget {
   final Color barColor;
 
   const FollowerCitiesCard(
-      {Key key,
-      this.cities,
+      {super.key,
+      required this.cities,
       this.barColor = AppColors.primary,
-      this.influencerUsername})
-      : super(key: key);
+      required this.influencerUsername});
 
   @override
   Widget build(BuildContext context) {
 
     List<ChartData> chartData = [];
-    if (cities != null) {
-      cities.forEach((city) {
-        chartData.add(ChartData(name: city.name, number: city.value));
-      });
-    }
+    cities.forEach((city) {
+      chartData.add(ChartData(name: city.name, number: city.value));
+    });
 
     return HorizontalBarChart1(
       chartName: 'Followers city',
