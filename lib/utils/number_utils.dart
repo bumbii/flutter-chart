@@ -7,10 +7,6 @@ num convertToDecimal(num number) {
 }
 
 String convertNumber(num number) {
-  if (number == null) {
-    return '0';
-  }
-
   if (number < 1000) {
     return number.toString();
   } else if (999 < number && number < 1000000) {
