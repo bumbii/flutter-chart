@@ -77,8 +77,10 @@ class _AnimatedHorizontalBarNoBackgroundState
 
   _onBuildDone() async {
     await Future.delayed(Duration(milliseconds: 200));
-    setState(() {
-      _width = widget.percentages;
-    });
+    if (mounted) {
+      setState(() {
+        _width = widget.percentages;
+      });
+    }
   }
 }

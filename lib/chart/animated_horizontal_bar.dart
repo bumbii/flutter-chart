@@ -81,8 +81,10 @@ class _AnimatedHorizontalBarState extends State<AnimatedHorizontalBar> {
 
   _onBuildDone() async {
     await Future.delayed(Duration(milliseconds: 200));
-    setState(() {
-      _width = widget.width;
-    });
+    if (mounted) {
+      setState(() {
+        _width = widget.width;
+      });
+    }
   }
 }
